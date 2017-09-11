@@ -1,0 +1,22 @@
+{
+  "name": "fc-serv",
+  "version": "0.0.1",
+  "description": "a server tool to running ali function-computes",
+  "main": "fc-serv.js",
+  "bin": {
+    "fcserv": "./bin/fcserv.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "serv",
+    "runing",
+    "function-compute"
+  ],
+  "author": "LordRobert",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^2.1.0"
+  }
+}
