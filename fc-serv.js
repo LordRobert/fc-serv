@@ -142,7 +142,7 @@ function invokeFun(service, fun, data, res) {
             log(rtn);
             log(error || data);
             res.writeHead(200, { 'Content-Type': 'application/x-json;charset=utf8' });
-            res.end(error || data, 'binary');
+            res.end(error || data);
         });
     }
 }
