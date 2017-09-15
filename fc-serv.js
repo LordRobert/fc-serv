@@ -67,7 +67,10 @@ function serv () {
         var ext = path.extname(pathName);
         var Type = req.method;
 
+            log('waht');
+            log(Type);
         if (Type == 'POST') {
+            log('POST');
             var resData = {};
             var body = '';
             req.on('data', function(data) {
@@ -78,7 +81,9 @@ function serv () {
 
             req.on('end', function(data) {
 
-                if (contentType == 'application/json') {
+                log('contentType:');
+                log(contentType);
+                if (contentType.indexOf('application/json') > -1) {
                     resData = JSON.parse(body);
                 } else {
                     var len = body.split('&').length;
@@ -111,6 +116,15 @@ function serv () {
 
         } else if (Type == 'GET') {
             res.end('server is running');
+        } else if (Type == 'OPTIONS') {
+            res.writeHead(200, {
+                'Access-Control-Request-Method': 'POST', 
+                'Access-Control-Allow-Origin': 'http://172.20.6.75:9999',
+                'Access-Control-Allow-Credentials': true,
+                'Access-Control-Allow-Headers': 'Content-Type',
+                'Content-Type': 'application/octet-stream'
+            });
+            res.end();
         }
     }).listen(mainPort);
 
@@ -141,7 +155,13 @@ function invokeFun(service, fun, data, res) {
             rtn += '函数 [' + service + '/' + fun + '] 执行结果：';
             log(rtn);
             log(error || data);
-            res.writeHead(200, { 'Content-Type': 'application/x-json;charset=utf8' });
+            res.writeHead(200, {
+                'Access-Control-Request-Method': 'POST', 
+                'Access-Control-Allow-Origin': 'http://172.20.6.75:9999',
+                'Access-Control-Allow-Credentials': true,
+                'Access-Control-Allow-Headers': 'Content-Type',
+                'Content-Type': 'application/json;charset=utf-8'
+            });
             res.end(error || data);
         });
     }
