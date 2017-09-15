@@ -49,7 +49,7 @@ function serv () {
                                     funs.push({
                                         service: servdir,
                                         function: fundir,
-                                        entry: path.resolve(funPath, 'index')
+                                        entry: path.resolve(funPath, 'main')
                                     });                             
                                 }
                             });
@@ -118,9 +118,11 @@ function serv () {
 }
 
 function invokeFun(service, fun, data, res) {
+    // console.log('all services:');
+    // console.log(funs);
     console.log('[' + service + '/' + fun + '] will be invoked:');
     var t_funs = funs.filter(function (f) {
-        return f.service == service && f.function == fun;
+        return f.service.toLowerCase() == service.toLowerCase() && f.function.toLowerCase() == fun.toLowerCase();
     });
     if(t_funs.length < 1) {
         res.end(JSON.stringify({code: 999, message: '服务或方法不存在'}));
@@ -139,7 +141,7 @@ function invokeFun(service, fun, data, res) {
             rtn += '函数 [' + service + '/' + fun + '] 执行结果：';
             log(rtn);
             log(error || data);
-            res.writeHead(200, { 'Content-Type': 'application/x-json' });
+            res.writeHead(200, { 'Content-Type': 'application/x-json;charset=utf8' });
             res.end(error || data, 'binary');
         });
     }
