@@ -1,6 +1,6 @@
 {
   "name": "fc-serv",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "a server tool to running ali function-computes",
   "main": "fc-serv.js",
   "bin": {
